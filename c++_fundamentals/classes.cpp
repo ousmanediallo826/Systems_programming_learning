@@ -14,14 +14,14 @@
 
 class Log {
     public:
-        const int LogLevelError = 0;
-        const int LogLevelWarning = 1;
-        const int LogLevelInfo = 2;
+        enum Level {
+            error = 0, warning, info
+        };
         
     private:
-        int m_LogLevel = LogLevelInfo;
+        Level m_LogLevel = info;
     public:
-    void setLevel(int level) {
+    void setLevel(Level level) {
         m_LogLevel = level;
         
     };
@@ -29,10 +29,10 @@ class Log {
     void Warn(const char* message)
     {
         
-        if (m_LogLevel >= LogLevelWarning) {
+        if (m_LogLevel >= warning) {
             std::cout << "[WARNING]: " << message << std::endl;
         }
-        else if (m_LogLevel >= LogLevelInfo) {
+        else if (m_LogLevel >= info) {
             std::cout << "[INFO]: " << message << std::endl;
         }
         else {
@@ -51,9 +51,9 @@ void classes() {
 
     // std::cout << "Player position: (" << player.x << ", " << player.y << ")" << std::endl;
     Log log;
-    log.setLevel(log.LogLevelWarning);
+    log.setLevel(log.warning);
     log.Warn("This is a warning message.");
-    
+
     std::cin.get();
 
 
